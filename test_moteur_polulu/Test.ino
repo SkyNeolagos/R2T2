@@ -15,11 +15,11 @@
 volatile unsigned long leftCount = 0.0;
 volatile unsigned long rightCount = 0.0;
 
-float acc = 240.0;
-float des = 240.0;
+float acc = 240.0;//distance d'acceleration
+float des = 240.0;//distance de décélération
 
-int vitesseG = 0;
-int vitesseD = 0;
+int vitesseG = 0;//vitesse de départ de la roue gauche
+int vitesseD = 0;//vitesse de départ de la roue droite
 
 float vitesseMax=64.0;
 float vitesseMin=25.0;
@@ -75,15 +75,15 @@ void avancer(float val){
   if (leftCount<val){
     
     if (leftCount < acc) {
-      float ponderateurVitesseAcc=((leftCount/acc) * vitesseMax);
-      vitesse = ponderateurVitesseAcc + vitesseMin;
+      float ponderateurVitesseAcc=((leftCount/acc) * vitesseMax);//ponderateur de la vitesse 
+      vitesse = ponderateurVitesseAcc + vitesseMin;//incrementation de la vitesse avec le ponderateur
       if(vitesse>vitesseMax){
         vitesse=vitesseMax;
       }
     }
     else if (leftCount > val-des) {
-      float ponderateurVitesseDes=((val-leftCount)/des * vitesseMax);
-      vitesse = ponderateurVitesseDes/1.1 + vitesseMin;
+      float ponderateurVitesseDes=((val-leftCount)/des * vitesseMax);//ponderateur de la vitesse 
+      vitesse = ponderateurVitesseDes/1.1 + vitesseMin;//incrementation de la vitesse avec le ponderateur
       if(vitesse>vitesseMax){
         vitesse=vitesseMax;
       }
